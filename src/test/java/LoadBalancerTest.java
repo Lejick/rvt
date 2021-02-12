@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.junit.jupiter.api.RepeatedTest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +23,7 @@ public class LoadBalancerTest {
         }
     }
 
-    @Test
+    @RepeatedTest(10)
     public void get_one_provider() {
         LoadBalancer loadBalancer = new LoadBalancer();
         Provider provider = new Provider("name1");

@@ -1,4 +1,5 @@
 import org.junit.Test;
+import org.junit.jupiter.api.RepeatedTest;
 import test.revolut.RandomSequenceGenerator;
 import test.revolut.ShortUrlRandomService;
 import test.revolut.ShortUrlService;
