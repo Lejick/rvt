@@ -1,4 +1,4 @@
-package test.revolut.balancer;
+package com.revolut.balancer;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package test.revolut.url;
+package com.revolut.url;
 
 import java.util.concurrent.ConcurrentHashMap;
 

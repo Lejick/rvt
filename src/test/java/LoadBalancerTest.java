@@ -1,7 +1,7 @@
 import org.junit.Test;
 import org.junit.jupiter.api.RepeatedTest;
-import test.revolut.balancer.LoadBalancer;
-import test.revolut.balancer.Provider;
+import com.revolut.balancer.LoadBalancer;
+import com.revolut.balancer.Provider;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

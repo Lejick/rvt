@@ -1,5 +1,5 @@
 import org.junit.Test;
-import test.revolut.url.SeoUrlService;
+import com.revolut.url.SeoUrlService;
 
 import static org.junit.Assert.assertEquals;
 

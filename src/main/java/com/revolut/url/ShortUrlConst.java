@@ -1,4 +1,4 @@
-package test.revolut.url;
+package com.revolut.url;
 
 public class ShortUrlConst {
     public static final String BASE_URL = "http://short.com/";

@@ -1,7 +1,7 @@
 import org.junit.Test;
-import test.revolut.url.IncrementUrlGenerator;
-import test.revolut.url.RandomSequenceGenerator;
-import test.revolut.url.ShortUrlService;
+import com.revolut.url.IncrementUrlGenerator;
+import com.revolut.url.RandomSequenceGenerator;
+import com.revolut.url.ShortUrlService;
 
 import static org.junit.Assert.assertNotEquals;
 

@@ -1,9 +1,8 @@
-package test.revolut.url;
+package com.revolut.url;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class IncrementUrlGenerator implements ShortUrlGenerator {
-
     private AtomicInteger index = new AtomicInteger(0);
 
     @Override

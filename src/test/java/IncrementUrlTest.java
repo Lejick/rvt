@@ -1,5 +1,5 @@
 import org.junit.Test;
-import test.revolut.url.IncrementUrlGenerator;
+import com.revolut.url.IncrementUrlGenerator;
 import static org.junit.Assert.assertEquals;
 
 public class IncrementUrlTest {

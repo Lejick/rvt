@@ -1,4 +1,4 @@
-package test.revolut.balancer;
+package com.revolut.balancer;
 
 
 public class Provider {
