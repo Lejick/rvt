@@ -1,3 +1,5 @@
+package test.revolut;
+
 public class ShortUrlService {
 
     public String createShortUrl(String sourceUrl, String seoWord) {
