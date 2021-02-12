@@ -1,12 +1,16 @@
-package test.revolut;
+package test.revolut.url;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public class ShortUrlRandomService {
+public class ShortUrlService {
     private static String baseUrl = "http://short.com/";
     private ConcurrentHashMap<String, String> linkMap = new ConcurrentHashMap<>();
 
-    private RandomSequenceGenerator generator = new RandomSequenceGenerator();
+    private ShortUrlGenerator generator ;
+
+    public ShortUrlService(ShortUrlGenerator shortUrlGenerator) {
+        generator=shortUrlGenerator;
+    }
 
     public String generateShortLink(String sourceUrl) {
         String shortUrl = baseUrl + generator.generate();

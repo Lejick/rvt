@@ -1,12 +1,9 @@
 import org.junit.Test;
-import org.junit.jupiter.api.RepeatedTest;
-import test.revolut.RandomSequenceGenerator;
-import test.revolut.ShortUrlRandomService;
-import test.revolut.ShortUrlService;
+import test.revolut.url.SeoUrlService;
 
 import static org.junit.Assert.assertEquals;
 
-public class ShortUrlTest {
+public class SeoUrlTest {
 
     @Test
     public void seo_url_success_1() {
@@ -14,7 +11,7 @@ public class ShortUrlTest {
         String seoWord = "MY-NEW-WS";
         String expectedResult = "http://short.com/MY-NEW-WS";
 
-        ShortUrlService shortUrlService = new ShortUrlService();
+        SeoUrlService shortUrlService = new SeoUrlService();
         assertEquals(expectedResult, shortUrlService.createShortUrl(sourceUrl, seoWord));
     }
 
@@ -24,7 +21,7 @@ public class ShortUrlTest {
         String sourceUrl = "http://looooong.com/somepath";
         String seoWord = "POTATO";
         String expectedResult = "http://short.com/POTATO";
-        ShortUrlService shortUrlService = new ShortUrlService();
+        SeoUrlService shortUrlService = new SeoUrlService();
         assertEquals(expectedResult, shortUrlService.createShortUrl(sourceUrl, seoWord));
     }
 
@@ -33,7 +30,7 @@ public class ShortUrlTest {
         String sourceUrl = "http://looooong.com/somepath";
         String seoWord = "POTATOPOTATOPOTATOPOTATOPOTATOPOTATOPOTATOPOTATOPOTATOPOTATOPOTATOPOTATO";
         String expectedResult = "http://short.com/POTATO";
-        ShortUrlService shortUrlService = new ShortUrlService();
+        SeoUrlService shortUrlService = new SeoUrlService();
         assertEquals(expectedResult, shortUrlService.createShortUrl(sourceUrl, seoWord));
     }
 
@@ -42,7 +39,7 @@ public class ShortUrlTest {
         String sourceUrl = "http://looooong.com/somepath";
         String seoWord = null;
         String expectedResult = "http://short.com/POTATO";
-        ShortUrlService shortUrlService = new ShortUrlService();
+        SeoUrlService shortUrlService = new SeoUrlService();
         assertEquals(expectedResult, shortUrlService.createShortUrl(sourceUrl, seoWord));
     }
 
@@ -51,43 +48,17 @@ public class ShortUrlTest {
         String sourceUrl = "http://looooong.com/somepath";
         String seoWord = "";
         String expectedResult = "http://short.com/";
-        ShortUrlService shortUrlService = new ShortUrlService();
+        SeoUrlService shortUrlService = new SeoUrlService();
         assertEquals(expectedResult, shortUrlService.createShortUrl(sourceUrl, seoWord));
     }
 
     @Test
-    public void random_url_success() {
+    public void get_original_url_success() {
         String sourceUrl = "http://looooong.com/somepath";
-        String baseUrl = "http://short.com/";
-        int expectedLength = baseUrl.length() + 4;
-        ShortUrlRandomService shortUrlRandomService = new ShortUrlRandomService();
-
-        String shortLink = shortUrlRandomService.generateShortLink(sourceUrl);
-
-        assertEquals(expectedLength, shortLink.length());
+        String seoWord = "word1";
+        SeoUrlService shortUrlService = new SeoUrlService();
+        shortUrlService.createShortUrl(sourceUrl, seoWord);
+        assertEquals(sourceUrl, shortUrlService.getOriginalUrl(seoWord));
     }
 
-    @Test
-    public void random_url_success_retrieve() {
-        String sourceUrl = "http://looooong.com/somepath";
-        ShortUrlRandomService shortUrlRandomService = new ShortUrlRandomService();
-        String shortLink = shortUrlRandomService.generateShortLink(sourceUrl);
-        String resultUrl = shortUrlRandomService.getSourceUrl(shortLink);
-        assertEquals(sourceUrl, resultUrl);
-    }
-
-    @Test
-    public void random_seq_generator_count() {
-        RandomSequenceGenerator generator = new RandomSequenceGenerator();
-
-        assertEquals(4, generator.generate().length());
-    }
-
-    @Test
-    public void random_seq_generator_alphabet() {
-        RandomSequenceGenerator generator = new RandomSequenceGenerator();
-        String resultSeq = generator.generate();
-        boolean isAlphanumeric = resultSeq.chars().allMatch(Character::isLetterOrDigit);
-        assertEquals(true, isAlphanumeric);
-    }
 }

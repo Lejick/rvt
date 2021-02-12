@@ -1,7 +1,10 @@
 import org.junit.Test;
 import org.junit.jupiter.api.RepeatedTest;
+import test.revolut.balancer.LoadBalancer;
+import test.revolut.balancer.Provider;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class LoadBalancerTest {
 
@@ -30,5 +33,25 @@ public class LoadBalancerTest {
         loadBalancer.register(provider);
         Provider registeredProvider = loadBalancer.getProvider();
         assertEquals(provider, registeredProvider);
+    }
+
+    @RepeatedTest(10)
+    public void get_two_providers() {
+        LoadBalancer loadBalancer = new LoadBalancer();
+        for (int i = 0; i < 10; i++) {
+            String name = "Provider " + i;
+            loadBalancer.register(new Provider(name));
+        }
+        Provider registeredProvider1 = loadBalancer.getProvider();
+        Provider registeredProvider2 = loadBalancer.getProvider();
+        assertNotEquals(registeredProvider1, registeredProvider2);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void register_twice() {
+        LoadBalancer loadBalancer = new LoadBalancer();
+        String name="name1";
+        loadBalancer.register(new Provider(name));
+        loadBalancer.register(new Provider(name));
     }
 }

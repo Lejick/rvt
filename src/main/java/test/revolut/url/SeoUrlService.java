@@ -1,10 +1,19 @@
-package test.revolut;
+package test.revolut.url;
 
-public class ShortUrlService {
+import java.util.concurrent.ConcurrentHashMap;
+
+public class SeoUrlService {
+    ConcurrentHashMap<String, String> urlMap = new ConcurrentHashMap<>();
 
     public String createShortUrl(String sourceUrl, String seoWord) {
         checkSeoWord(seoWord);
-        return ShortUrlConst.BASE_URL + seoWord;
+        String urlKey = ShortUrlConst.BASE_URL + seoWord;
+        urlMap.put(seoWord, sourceUrl);
+        return urlKey;
+    }
+
+    public String getOriginalUrl(String seoWord) {
+        return urlMap.get(seoWord);
     }
 
     private void checkSeoWord(String seoWord) {

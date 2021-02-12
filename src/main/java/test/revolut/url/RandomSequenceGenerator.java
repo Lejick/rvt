@@ -1,8 +1,8 @@
-package test.revolut;
+package test.revolut.url;
 
 import java.util.Random;
 
-public class RandomSequenceGenerator {
+public class RandomSequenceGenerator implements ShortUrlGenerator{
     private static final String NUMBERS = "0123456789";
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String ALPHABET_LOW = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase();
@@ -10,6 +10,7 @@ public class RandomSequenceGenerator {
     private Random random = new Random();
 
 
+    @Override
     public String generate() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 4; i++) {
