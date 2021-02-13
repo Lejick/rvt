@@ -4,9 +4,17 @@ import java.util.*;
 
 public class LoadBalancer {
     private static final int MAXIMUM_PROVIDERS_COUNT_DEFAULT = 10;
-    private static int maxSize = MAXIMUM_PROVIDERS_COUNT_DEFAULT;
+    private int maxSize;
     private Set<Provider> providersSet = new HashSet<>();
     private ArrayList<Provider> remaining = new ArrayList<>();
+
+    public LoadBalancer(int maxSize) {
+        this.maxSize = maxSize;
+    }
+
+    public LoadBalancer() {
+        maxSize = MAXIMUM_PROVIDERS_COUNT_DEFAULT;
+    }
 
     public void register(Provider provider) {
         checkMaximiumSize();
