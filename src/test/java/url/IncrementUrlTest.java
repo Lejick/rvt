@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class IncrementUrlTest {
 
     @Test
-    public void seo_url_success_1() {
+    public void increment_url_success_1() {
         String baseUrl="http://short.com/";
         IncrementUrlGenerator incrementUrlService = new IncrementUrlGenerator();
         assertEquals("http://short.com/1", baseUrl+incrementUrlService.generate());
