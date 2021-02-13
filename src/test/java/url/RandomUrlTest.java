@@ -41,4 +41,12 @@ public class RandomUrlTest {
         boolean isAlphanumeric = resultSeq.chars().allMatch(Character::isLetterOrDigit);
         assertEquals(true, isAlphanumeric);
     }
+
+    @Test
+    public void random_seq_generator_length() {
+        int seqLength=10;
+        RandomSequenceGenerator generator = new RandomSequenceGenerator(seqLength);
+        String resultSeq = generator.generate();
+        assertEquals(seqLength, resultSeq.length());
+    }
 }

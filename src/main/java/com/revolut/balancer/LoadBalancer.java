@@ -5,46 +5,49 @@ import java.util.*;
 public class LoadBalancer {
     private static final int MAXIMUM_PROVIDERS_COUNT_DEFAULT = 10;
     private int maxSize;
-    private Set<Provider> providersSet = new HashSet<>();
-    private ArrayList<Provider> remaining = new ArrayList<>();
+    private ArrayList<Provider> providersList = new ArrayList<>();
+    private IndexBalancerIF indexBalancerIF;
 
-    public LoadBalancer(int maxSize) {
-        this.maxSize = maxSize;
-    }
 
     public LoadBalancer() {
         maxSize = MAXIMUM_PROVIDERS_COUNT_DEFAULT;
+        this.indexBalancerIF = new RandomIndexGenerator();
     }
+
+
+    public LoadBalancer(IndexBalancerIF indexBalancerIF) {
+        maxSize = MAXIMUM_PROVIDERS_COUNT_DEFAULT;
+        this.indexBalancerIF = indexBalancerIF;
+    }
+
+    public LoadBalancer(IndexBalancerIF indexBalancerIF, int maxSize) {
+        this.maxSize = maxSize;
+        this.indexBalancerIF = indexBalancerIF;
+    }
+
 
     public void register(Provider provider) {
         checkMaximiumSize();
         checkAlreadyRegistered(provider);
-        providersSet.add(provider);
+        providersList.add(provider);
+        indexBalancerIF.incrementMax();
     }
 
     private void checkAlreadyRegistered(Provider provider) {
-        if (providersSet.contains(provider)) {
+        if (providersList.contains(provider)) {
             throw new IllegalArgumentException();
         }
     }
 
     private void checkMaximiumSize() {
-        if (providersSet.size() > maxSize) {
+        if (providersList.size() > maxSize) {
             throw new IllegalStateException();
         }
     }
 
     public synchronized Provider getProvider() {
-        checkRemains();
-        Random rand = new Random();
-        Provider provider = remaining.get(rand.nextInt(remaining.size()));
-        remaining.remove(provider);
-        return provider;
+        int nextIndex = indexBalancerIF.nextIndex();
+        return providersList.get(nextIndex);
     }
 
-    private void checkRemains() {
-        if (remaining.size() == 0) {
-            remaining = new ArrayList<>(providersSet);
-        }
-    }
 }

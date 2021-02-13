@@ -27,8 +27,7 @@ public class LoadBalancerTest {
             loadBalancer.register(new Provider(name));
         }
     }
-
-    @RepeatedTest(10)
+@Test
     public void get_one_provider() {
         LoadBalancer loadBalancer = new LoadBalancer();
         Provider provider = new Provider("name1");
@@ -52,7 +51,7 @@ public class LoadBalancerTest {
     @Test(expected = IllegalArgumentException.class)
     public void register_twice() {
         LoadBalancer loadBalancer = new LoadBalancer();
-        String name="name1";
+        String name = "name1";
         loadBalancer.register(new Provider(name));
         loadBalancer.register(new Provider(name));
     }

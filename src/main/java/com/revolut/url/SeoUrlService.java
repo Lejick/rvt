@@ -2,30 +2,33 @@ package com.revolut.url;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ Service provide short link
+ */
 public class SeoUrlService {
     ConcurrentHashMap<String, String> urlMap = new ConcurrentHashMap<>();
 
+    /**
+     *
+     * @param sourceUrl original url
+     * @param seoWord key word enter by user
+     * @return short version of link
+     */
     public String createShortUrl(String sourceUrl, String seoWord) {
-        checkSeoWord(seoWord);
+        SeoWordChecker.check(seoWord);
         String urlKey = ShortUrlConst.BASE_URL + seoWord;
         urlMap.put(seoWord, sourceUrl);
         return urlKey;
     }
 
+    /**
+     * retrieve original url by key - seo word
+     * @param seoWord key entered by user
+     * @return
+     */
     public String getOriginalUrl(String seoWord) {
         return urlMap.get(seoWord);
     }
 
-    private void checkSeoWord(String seoWord) {
-        if (seoWord == null) {
-            throw new IllegalArgumentException(ShortUrlConst.ERROR_MESSAGE_NULL);
-        }
-        if (seoWord.isEmpty()) {
-            throw new IllegalArgumentException(ShortUrlConst.ERROR_MESSAGE_EMPTY);
-        }
-        if (seoWord.length() > ShortUrlConst.MAX_SEO_WORD_LENGTH) {
-            throw new IllegalArgumentException(ShortUrlConst.ERROR_MESSAGE_MAX_LENGTH);
-        }
-    }
 
 }

@@ -1,5 +1,6 @@
 package url;
 
+import com.revolut.url.SeoWordChecker;
 import org.junit.Test;
 import com.revolut.url.SeoUrlService;
 
@@ -62,5 +63,22 @@ public class SeoUrlTest {
         shortUrlService.createShortUrl(sourceUrl, seoWord);
         assertEquals(sourceUrl, shortUrlService.getOriginalUrl(seoWord));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void seo_checkers_null(){
+        SeoWordChecker.check(null);
+
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void seo_checkers_empty(){
+        SeoWordChecker.check("");
+
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void seo_checkers_tooLong(){
+        SeoWordChecker.check("1234213412423421341234123421342134");
+
+    }
+
 
 }
