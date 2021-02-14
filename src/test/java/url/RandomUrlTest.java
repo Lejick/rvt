@@ -7,6 +7,29 @@ import com.revolut.url.ShortUrlService;
 import static org.junit.Assert.assertEquals;
 
 public class RandomUrlTest {
+
+    @Test
+    public void random_seq_generator_count() {
+        RandomSequenceGenerator generator = new RandomSequenceGenerator();
+        assertEquals(4, generator.generate().length());
+    }
+
+    @Test
+    public void random_seq_generator_alphabet() {
+        RandomSequenceGenerator generator = new RandomSequenceGenerator();
+        String resultSeq = generator.generate();
+        boolean isAlphanumeric = resultSeq.chars().allMatch(Character::isLetterOrDigit);
+        assertEquals(true, isAlphanumeric);
+    }
+
+    @Test
+    public void random_seq_generator_length() {
+        int seqLength = 10;
+        RandomSequenceGenerator generator = new RandomSequenceGenerator(seqLength);
+        String resultSeq = generator.generate();
+        assertEquals(seqLength, resultSeq.length());
+    }
+
     @Test
     public void random_url_success() {
         String sourceUrl = "http://looooong.com/somepath";
@@ -26,27 +49,5 @@ public class RandomUrlTest {
         String shortLink = shortUrlRandomService.generateShortLink(sourceUrl);
         String resultUrl = shortUrlRandomService.getSourceUrl(shortLink);
         assertEquals(sourceUrl, resultUrl);
-    }
-
-    @Test
-    public void random_seq_generator_count() {
-        RandomSequenceGenerator generator = new RandomSequenceGenerator();
-        assertEquals(4, generator.generate().length());
-    }
-
-    @Test
-    public void random_seq_generator_alphabet() {
-        RandomSequenceGenerator generator = new RandomSequenceGenerator();
-        String resultSeq = generator.generate();
-        boolean isAlphanumeric = resultSeq.chars().allMatch(Character::isLetterOrDigit);
-        assertEquals(true, isAlphanumeric);
-    }
-
-    @Test
-    public void random_seq_generator_length() {
-        int seqLength=10;
-        RandomSequenceGenerator generator = new RandomSequenceGenerator(seqLength);
-        String resultSeq = generator.generate();
-        assertEquals(seqLength, resultSeq.length());
     }
 }
