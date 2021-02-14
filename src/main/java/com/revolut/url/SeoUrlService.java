@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SeoUrlService {
     ConcurrentHashMap<String, String> urlMap = new ConcurrentHashMap<>();
-
+    public static final String BASE_URL = "http://short.com/";
     /**
      *
      * @param sourceUrl original url
@@ -16,7 +16,7 @@ public class SeoUrlService {
      */
     public String createShortUrl(String sourceUrl, String seoWord) {
         SeoWordChecker.check(seoWord);
-        String urlKey = ShortUrlConst.BASE_URL + seoWord;
+        String urlKey = BASE_URL + seoWord;
         urlMap.put(seoWord, sourceUrl);
         return urlKey;
     }
