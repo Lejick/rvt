@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class RandomIndexGenerator implements IndexBalancerIF {
+public class RandomExclusiveIndexGenerator implements IndexBalancerIF {
     private List<Integer> used = new ArrayList<>();
     private AtomicInteger maxInt = new AtomicInteger(0);
 

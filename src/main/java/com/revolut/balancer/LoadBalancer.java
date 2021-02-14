@@ -11,7 +11,7 @@ public class LoadBalancer {
 
     public LoadBalancer() {
         maxSize = MAXIMUM_PROVIDERS_COUNT_DEFAULT;
-        this.indexBalancerIF = new RandomIndexGenerator();
+        this.indexBalancerIF = new RandomExclusiveIndexGenerator();
     }
 
 
