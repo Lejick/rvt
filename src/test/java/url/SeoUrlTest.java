@@ -51,6 +51,7 @@ public class SeoUrlTest {
     public void seo_url_null() {
         String sourceUrl = "http://looooong.com/somepath";
         String seoWord = null;
+
         SeoUrlService shortUrlService = new SeoUrlService();
         assertThrows(IllegalArgumentException.class, () -> shortUrlService.createShortUrl(sourceUrl, seoWord));
     }
@@ -59,15 +60,13 @@ public class SeoUrlTest {
     public void seo_url_empty() {
         String sourceUrl = "http://looooong.com/somepath";
         String seoWord = "";
+
         SeoUrlService shortUrlService = new SeoUrlService();
         assertThrows(IllegalArgumentException.class, () -> shortUrlService.createShortUrl(sourceUrl, seoWord));
     }
 
     @Test
     public void short_url_no_such_element_2_retrieve() {
-        String longPath = "http://looooong.com/somepath ";
-        String seoWord = "POTATO";
-
         SeoUrlService shortUrlService = new SeoUrlService();
         assertThrows(NoSuchElementException.class, () -> shortUrlService.getOriginalUrl("fake"));
     }

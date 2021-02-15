@@ -9,6 +9,9 @@ public class ShortUrlService {
 
     private ShortUrlGenerator generator;
 
+    public ShortUrlService() {
+    }
+
     public ShortUrlService(ShortUrlGenerator shortUrlGenerator) {
         generator = shortUrlGenerator;
     }
@@ -21,5 +24,9 @@ public class ShortUrlService {
 
     public String getSourceUrl(String shortLink) {
         return linkMap.get(shortLink);
+    }
+
+    public void setGenerator(ShortUrlGenerator urlGenerator) {
+        generator=urlGenerator;
     }
 }

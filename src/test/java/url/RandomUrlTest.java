@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RandomUrlTest {
 
-    // create random generator
     private static RandomSequenceGenerator randomSequenceGenerator = new RandomSequenceGenerator();
 
     @Test

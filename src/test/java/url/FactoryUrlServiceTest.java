@@ -36,6 +36,22 @@ public class FactoryUrlServiceTest {
     }
 
     @Test
+    public void get_different_type_link_strategy() {
+        String originUrl = "http://looooong.com/somepath";
+
+        ShortUrlService incrementUrlService = new ShortUrlService();
+        incrementUrlService.setGenerator(new IncrementUrlGenerator());
+
+        ShortUrlService randomUrlService = new ShortUrlService();
+        randomUrlService.setGenerator(new RandomSequenceGenerator());
+
+        String short1 = incrementUrlService.generateShortLink(originUrl);
+        String short2 = randomUrlService.generateShortLink(originUrl);
+
+        assertNotEquals(short1, short2);
+    }
+
+    @Test
     public void get_2_url_link() {
         String originUrl = "http://looooong.com/somepath";
 
