@@ -24,4 +24,8 @@ public class Provider {
         }
         return false;
     }
+
+    public String getName() {
+        return name;
+    }
 }

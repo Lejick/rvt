@@ -1,13 +1,13 @@
 package url;
 
 import com.revolut.url.UrlServiceFactory;
-import org.junit.Test;
 import com.revolut.url.IncrementUrlGenerator;
 import com.revolut.url.RandomSequenceGenerator;
 import com.revolut.url.ShortUrlService;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class FactoryUrlServiceTest {
 

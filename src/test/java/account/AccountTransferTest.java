@@ -4,11 +4,13 @@ import com.revolut.account.Account;
 import com.revolut.account.NegativeAmountException;
 import com.revolut.account.NotEnoughMoneyException;
 import com.revolut.account.OperationDeniedException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class AccountTransferTest {
 
@@ -18,39 +20,38 @@ public class AccountTransferTest {
         Account account1 = new Account(new BigDecimal(100), "1");
         Account account2 = new Account(new BigDecimal(10), "2");
         account1.transfer(account2, new BigDecimal(50));
-
         assertEquals(new BigDecimal(50), account1.getAmount());
         assertEquals(new BigDecimal(60), account2.getAmount());
     }
 
-    @Test(expected = NotEnoughMoneyException.class)
+    @Test
     public void not_enough_money() throws NegativeAmountException, NotEnoughMoneyException, OperationDeniedException {
         Account account1 = new Account(new BigDecimal(10), "1");
         Account account2 = new Account(new BigDecimal(10), "2");
-        account1.transfer(account2, new BigDecimal(50));
+        assertThrows(NotEnoughMoneyException.class, () -> account1.transfer(account2, new BigDecimal(50)));
     }
 
-    @Test(expected = NegativeAmountException.class)
+    @Test
     public void negative_amount() throws NegativeAmountException, NotEnoughMoneyException, OperationDeniedException {
         Account account1 = new Account(new BigDecimal(100), "1");
         Account account2 = new Account(new BigDecimal(10), "2");
-        account1.transfer(account2, new BigDecimal(-50));
+        assertThrows(NegativeAmountException.class, () -> account1.transfer(account2, new BigDecimal(-50)));
     }
 
-    @Test(expected = OperationDeniedException.class)
+    @Test
     public void operation_denied_from() throws NegativeAmountException, NotEnoughMoneyException, OperationDeniedException {
         Account account1 = new Account(new BigDecimal(100), "1");
         Account account2 = new Account(new BigDecimal(10), "2");
         account1.setOperationsAllowed(false);
-        account1.transfer(account2, new BigDecimal(50));
+        assertThrows(OperationDeniedException.class, () -> account1.transfer(account2, new BigDecimal(50)));
     }
 
-    @Test(expected = OperationDeniedException.class)
+    @Test
     public void operation_denied_to() throws NegativeAmountException, NotEnoughMoneyException, OperationDeniedException {
         Account account1 = new Account(new BigDecimal(100), "1");
         Account account2 = new Account(new BigDecimal(10), "2");
         account2.setOperationsAllowed(false);
-        account1.transfer(account2, new BigDecimal(50));
+        assertThrows(OperationDeniedException.class, () -> account1.transfer(account2, new BigDecimal(50)));
     }
 
 }

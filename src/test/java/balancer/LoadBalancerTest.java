@@ -2,26 +2,27 @@ package balancer;
 
 import com.revolut.balancer.PureRandomIndexGenerator;
 import com.revolut.balancer.RoundRobinIndexGenerator;
-import org.junit.Test;
 import org.junit.jupiter.api.RepeatedTest;
 import com.revolut.balancer.LoadBalancer;
 import com.revolut.balancer.Provider;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class LoadBalancerTest {
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void register_balancer_exceed_limit() {
         LoadBalancer loadBalancer = new LoadBalancer();
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 10; i++) {
             String name = "Provider " + i;
             loadBalancer.register(new Provider(name));
         }
+        assertThrows(IllegalStateException.class, () -> loadBalancer.register(new Provider("Provider 11")));
     }
 
     @Test
@@ -54,12 +55,12 @@ public class LoadBalancerTest {
         assertNotEquals(registeredProvider1, registeredProvider2);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void register_twice() {
         LoadBalancer loadBalancer = new LoadBalancer();
         String name = "name1";
         loadBalancer.register(new Provider(name));
-        loadBalancer.register(new Provider(name));
+        assertThrows(IllegalArgumentException.class, () -> loadBalancer.register(new Provider(name)));
     }
 
     @RepeatedTest(100)

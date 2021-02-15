@@ -40,7 +40,7 @@ public class LoadBalancer {
     }
 
     private void checkMaximiumSize() {
-        if (providersList.size() > maxSize) {
+        if (providersList.size() >= maxSize) {
             throw new IllegalStateException();
         }
     }
