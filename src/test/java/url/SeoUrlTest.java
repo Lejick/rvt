@@ -77,8 +77,17 @@ public class SeoUrlTest {
         String seoWord = "POTATO";
 
         SeoUrlService shortUrlService = new SeoUrlService();
-
         assertEquals(longPath, shortUrlService.getOriginalUrl("fake"));
     }
 
+
+    @Test()
+    public void short_url_element_retrieve() {
+        String longPath = "http://looooong.com/somepath ";
+        String seoWord = "POTATO";
+
+        SeoUrlService shortUrlService = new SeoUrlService();
+        shortUrlService.createShortUrl(longPath,seoWord);
+        assertEquals(longPath, shortUrlService.getOriginalUrl(seoWord));
+    }
 }
