@@ -4,6 +4,8 @@ import com.revolut.url.SeoWordChecker;
 import org.junit.Test;
 import com.revolut.url.SeoUrlService;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.Assert.assertEquals;
 
 public class SeoUrlTest {
@@ -69,13 +71,14 @@ public class SeoUrlTest {
         shortUrlService.createShortUrl(sourceUrl, seoWord);
     }
 
-    @Test
-    public void get_original_url_success() {
-        String sourceUrl = "http://looooong.com/somepath";
-        String seoWord = "word1";
+    @Test(expected = NoSuchElementException.class)
+    public void short_url_no_such_element_2_retrieve() {
+        String longPath = "http://looooong.com/somepath ";
+        String seoWord = "POTATO";
+
         SeoUrlService shortUrlService = new SeoUrlService();
-        shortUrlService.createShortUrl(sourceUrl, seoWord);
-        assertEquals(sourceUrl, shortUrlService.getOriginalUrl(seoWord));
+
+        assertEquals(longPath, shortUrlService.getOriginalUrl("fake"));
     }
 
 }
