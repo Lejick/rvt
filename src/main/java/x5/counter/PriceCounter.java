@@ -1,4 +1,4 @@
-package x5;
+package x5.counter;
 
 import org.junit.Test;
 

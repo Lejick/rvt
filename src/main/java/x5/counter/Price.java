@@ -1,13 +1,14 @@
-package x5;
+package x5.counter;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @Builder
-public class ProductValueDto {
-    Product product;
-    Integer value;
+public class Price {
+    BigDecimal value;
 }

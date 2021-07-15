@@ -1,4 +1,4 @@
-package x5;
+package x5.counter;
 
 import lombok.Builder;
 import lombok.Data;
